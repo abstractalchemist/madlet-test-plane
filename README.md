@@ -11,7 +11,14 @@ MADLET Test Plan
 
 #### Purpose
 
+The purpose of this testing is to validate the environment in which the MADLET software will be installed.  
+
 #### Testing Strategy
+
+The tester will validate the following:
+
+* the operating system in which the system is installed will be a Red Hat 7 operating system
+* the system in which the MADLET software will be installed will have a route to a SUMP server
 
 #### Success Conditions
 
@@ -51,3 +58,6 @@ MADLET Test Plan
 
 ### Tools and Usage
 
+### Risks and Mitigation
+
+### Roles and Expectations
