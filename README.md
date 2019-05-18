@@ -17,11 +17,35 @@ MADLET Test Plan
 
 ### Post Installation Testing
 
+#### Purpose
+
+#### Testing Strategy
+
+#### Success Conditions
+
 ### Configuration Testing
+
+#### Purpose
+
+#### Testing Strategy
+
+#### Success Conditions
 
 ### Initial Startup Testing
 
+#### Purpose
+
+#### Testing Strategy
+
+#### Success Conditions
+
 ### Operational Testing
+
+#### Purpose
+
+#### Testing Strategy
+
+#### Success Conditions
 
 ## Test Management 
 
