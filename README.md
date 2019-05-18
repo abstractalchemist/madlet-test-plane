@@ -20,7 +20,7 @@ The purpose of this testing is to validate the environment in which the MADLET s
 The tester will validate the following:
 
 * the operating system in which the system is installed will be a Red Hat 7 operating system
-   * this objective can be verified by running ```cat /etc/redhat-release ```.  The value must be ** Red Hat Enterprise Linux Server release 7.6 (MAIPO) **
+   * this objective can be verified by running ```cat /etc/redhat-release ```.  The value must be **Red Hat Enterprise Linux Server release 7.6 (MAIPO)**
 
 * the system in which the MADLET software will be installed will have a route to a SUMP server
 * the system has access to the AATS and JAWS sensor data through a NAS, or some equivalent data
