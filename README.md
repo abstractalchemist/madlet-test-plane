@@ -142,9 +142,21 @@ In order to mitigate this risk, developers and project management will work with
 
 
 #### Restricted administrative support to physical systems
+
+This risk describes the possiblity of during testing not having a line of communication to system administrative support.  In order to mitigate this risk, a schedule should be made that all required parties agree to be available during testing, and documentation should be made available to all stakeholders regarding how to get in contact with system administrators in case of failure conditions during testing.
+
 #### Restricted access to needed data
+
+This risk describes the possiblity of being unable to access the required sensor data needed during operational testing.  In order to mitigate this risk, developers and project management should work with system and site administration to ensure that before the system moves to operational status, the system is configured as described in conops documentation to allow the software to have access to the data sources.  In the event that the data sources become unavailable during system operation after it was available during system startup, system and site administration should be available during system operation to ensure successful testing.
+
 #### Data platform differs from expectations
+
+This risk describes the possiblity that the sensor sources that produce the data operate differently from the expected way that it was simulated on the testing and development systems.  To mitigate this risk, developers will survey that system to ensure that the sensor data sources are available to the system before the software is installed, and should have strategy for verifying that the sensor data sources operate as expected on the system.
+
 #### Restricted system configuration from expectations
+
+This risk describes the possibility that the system itself is differs from the expected configuration.  This is mitigated by the pre-installation testing phase.  This risk will also be mitigated by providing documentation on expected system configuration to system and site administrators in order to correct for any difference between the testing/development platform, and the target production/testing platforms.
+
 #### Restricted or blocked access to needed log or configuration files
 
 ### Roles and Expectations
