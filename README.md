@@ -7,7 +7,7 @@ The purpose of this document is to explain the objectives, targets, and strategi
 
 ## Assumptions
 
-The following documents the assumptions under which the stakeholders, which include the testers, developers, and users will be operating under during each testing phase.  Risk mitigation strategies should these assumptions fail will be documented under the risk mitigation section.
+The following documents the assumptions under which the stakeholders, which include the testers, developers, and users will be operating under during each testing phase.  Risk mitigation strategies should these assumptions fail will be documented under the risk mitigation section.  Assumptions specific to each testing objective will be described in the testing strategy under each objective.
 
 It is assumed that the tester has physical access to the system in which the MADLET software will be installed.  The tester must have some form of administrative access to the system, such as the ability to sudo to the root user, the ability to transfer software to and from the system, and the ability to reconfigure the system as needed.
 
@@ -76,7 +76,7 @@ The tester will validate that all the RPM artifacts associated with the MADLET s
 
 #### Purpose
 
-the purpose of this testing is to validate the software was correctly configured after the MADLET software has been correctly installed.  This testing is to be done after the MADLET software has been validated to have been installed on the system. 
+The purpose of this testing is to validate the software was correctly configured after the MADLET software has been correctly installed.  This testing is to be done after the MADLET software has been validated to have been installed on the system. 
 
 #### Testing Strategy
 
@@ -84,15 +84,19 @@ The system administrator and/or the software developers, possible following a fo
 
 #### Success Conditions
 
-### Initial Startup Testing
+### Initial Operational Testing
 
 #### Purpose
+
+The purpose of this testing is to test that the system has correctly started up after the initial installation step.  This testing is to be done after configuration testing is complete and the system has been started up based on documentation provided by developers.
 
 #### Testing Strategy
 
 #### Success Conditions
 
 ### Operational Testing
+
+The purpose of this testing is to verify that during the operational lifetime of the software it is performing as expected.  The minimum operational capabilites and performance baselines are provided here, as well as testing strategies for verifying that the software is performing as expected.  In addtion to formal testing plans, exploratory testing to determine edge case issues and special cases will be outlined here.
 
 #### Purpose
 
@@ -102,8 +106,39 @@ The system administrator and/or the software developers, possible following a fo
 
 ## Test Management 
 
+In addition to testing strategies outlined here, tools for recording outcomes of testing, planning failure resolution, and implementing risk mitigation strategies will be outlined here.
+
 ### Tools and Usage
+
+#### Gitlab
 
 ### Risks and Mitigation
 
+The following section lists strategies for mitigating potential risk involved with testing the system.
+
+* Terminal access to the system
+* Restricted network configuration
+* Inability to install required third-party softwares
+* Restricted administrative support to physical systems
+* Restricted access to needed data
+* Data platform differs from expectations
+* Restricted system configuration from expectations
+* Restricted or blocked access to needed log or configuration files
+
 ### Roles and Expectations
+
+The following section describes the roles and expectations of the people involved with testing the system.
+
+#### Developers
+
+Developers are expected to support any testing activities that are performed on the system, as well as provide documentation for configuring, maintaining, updating, and using the software.  During testing, failuure conditions of the software must be reported to developers and project management via standard ticketing channels.  
+
+#### Testers
+
+Testers are expected to review the test plan.  They must have a through understanding of how to operate the software that they are testing, as well as individual strategies for testing aspects of the system other that the one s listed here.  Testers are expected to be able to recognize when a success condition occurs for each phase of testing, as well as report failure conditions that occur during testing.  They must understand the proper channels needed to report failures.
+
+#### System Administrators
+
+System administrators are expected to provide support for each aspect of the testing phases.  They expected to have access or information regarding external dependency that were tested for during the first phase of the testing, as well as information regarding the physical system in which the MADLET software was installed on.  Questions regarding system configuration and system environment should be redirected to system administrators by the developers and testers.
+
+#### Project Management
