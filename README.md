@@ -13,6 +13,8 @@ It is assumed that the tester has physical access to the system in which the MAD
 
 ## Objectives
 
+Each objective validates a phase of the operational lifecycle of the MADLET software.  Please note that each objective listed here is in order, and that the previous objective must complete pass with a success condition before the next set of testing objectives be performed.
+
 ### Environmental Installation Testing
 
 #### Purpose
@@ -50,7 +52,7 @@ The tester will validate the following:
 
 #### Success Conditions
 
-This test objective must be complete fulfilled.  Each capability must be verified before software installation should begin.  A failure of any one of these sub objectives causes a complete failure of the entire objective.
+This test objective must be complete fulfilled.  Each capability must be verified before software installation should begin.  A failure of any one of these sub objectives causes a complete failure of the entire objective.  
 
 ### Post Installation Testing
 
@@ -69,8 +71,16 @@ The tester will validate that all the RPM artifacts associated with the MADLET s
 * madlet-nodejs
 * madlet-tensorflow
 * infer
+* yolo-rotate
+* yolo-single
+
+Developers will provide a script called ```madlet-install```.  This script can be run, assuming the script is the current working directory
+```
+./madlet-install --check_install
+```
 
 #### Success Conditions
+If the script ```madlet-install``` returns a successful exit code, then the software packages have been successfully installed.  Missing packages that as detected by the ```madlet-install`` script constitute a failure of this testing objective.
 
 ### Configuration Testing
 
@@ -80,7 +90,7 @@ The purpose of this testing is to validate the software was correctly configured
 
 #### Testing Strategy
 
-The system administrator and/or the software developers, possible following a form of DevOps strategy, will have access to all information from the first objective.  The person configuring the software will have access to the documentation needed to correctly configure the software.  The tester will also have full access to the documentation that was used to configure the software.  The tester will validate the following:
+The system administrator and/or the software developers, possible following a form of DevOps strategy, will have access to all information from the first objective.  The person configuring the software will have access to the documentation needed to correctly configure the software.  The tester will also have full access to the documentation that was used to configure the software.  A script will be provided to execute post configuration testing within the installation packages.
 
 #### Success Conditions
 
@@ -92,17 +102,55 @@ The purpose of this testing is to test that the system has correctly started up 
 
 #### Testing Strategy
 
+The developers will provide a package called ```madlet-status-scripts```.  This package contains a series of scripts that can be utilized in order to validate the initial installation and validate the initial startup of the software.  The script ```/opt/madlet/bin/control``` can be run as follows in order to validate as root and run the initial startup:
+```
+/opt/madlet/bin/control --restart
+```
+
+Then as any other non-privileged user in the ```madlet``` group, the following can be run
+```
+/opt/madlet/bin/control --test --sensor aats
+/opt/madlet/bin/control --test --sensor jaws
+/opt/madlet/bin/control --test --sensor custody_raven
+/opt/madlet/bin/control --test --sensor tactical_raven
+```
+
 #### Success Conditions
+
+If each of the test returns a successful condition, then the entire objective is successful.  The possible failures can occur:
+* AATs 
+* JAWS
+* Custody Raven
+* Tactical Raven
+
+In each case, this implies that the services do not have access to the data source that it is meant to access.  Please verify that the environmental testing objective and configuration testing objective have successfully passed.
 
 ### Operational Testing
 
-The purpose of this testing is to verify that during the operational lifetime of the software it is performing as expected.  The minimum operational capabilites and performance baselines are provided here, as well as testing strategies for verifying that the software is performing as expected.  In addtion to formal testing plans, exploratory testing to determine edge case issues and special cases will be outlined here.
-
 #### Purpose
+
+The purpose of this testing is to verify that during the operational lifetime of the software it is performing as expected.  The minimum operational capabilites and performance baselines are provided here, as well as testing strategies for verifying that the software is performing as expected.  In addtion to formal testing plans, exploratory testing to determine edge case issues and special cases will be outlined here.  This testing should occur on a recurring basis, as well as after any post-maintenence of the host system.
 
 #### Testing Strategy
 
+Several strategies can be employed to verify that, during operations, the software is operating as expected.
+
+1.  Run ```/opt/madlet/bin/control --test --sensor <sensor>```
+2.  Exam journalctl for each service.  The script ```/opt/madlet/bin/control``` provides a log option
+  1. ```/opt/madlet/bin/control --log http_api```
+  2. ```/opt/madlet/bin/control --log tensorflow_api```
+  3. ```/opt/madlet/bin/control --log satnet-results-server```
+  4. ```/opt/madlet/bin/control --log s4_client@aats```
+  5. ```/opt/madlet/bin/control --log s4_client@jaws```
+  6. ```/opt/madlet/bin/control --log fits-directory-reader@custody_raven```
+  7. ```/opt/madlet/bin/control --log fits-directory-reader@tactical_raven```
+  
+  This examiniation should probably be done in conjunction with developer input/observation.  Project management and system administration should arrange for terminal access to the system.
+3. Validate all services status api's are available and responding.  Normally this can be done via the ```/opt/madlet/bin/control``` script but this can also be individually done via standard unix commands.  In addition, the command ```ss``` can be used to verify all services are listening on status ports.
+4.  running ```nvidia-smi``` utility to validate that the tensorflow_model_server is running correctly.
+
 #### Success Conditions
+
 
 ## Test Management 
 
